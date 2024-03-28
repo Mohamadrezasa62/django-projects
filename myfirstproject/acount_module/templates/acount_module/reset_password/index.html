@@ -1,0 +1,21 @@
+{% extends 'layout/layout.html' %}
+{% block title %}
+    ورود به حساب کاربری
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <form method="post" action="{% url 'reset-password' active_code=active_code %}">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group col-md-12">
+            {{ field.label }}
+            {{ field }}
+            {{ field.errors }}
+            </div>
+            <br>
+        {% endfor %}
+    <button class="btn-success btn" type="submit">ثبت رمز عبور</button>
+
+    </form>
+    </div>
+{% endblock %}

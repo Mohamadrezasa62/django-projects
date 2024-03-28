@@ -1,0 +1,4 @@
+/*#my_required {*/
+/*    oninvalid: "this.setCustomValidity('Please Enter valid email')",*/
+/*    oninput: "setCustomValidity('')"*/
+/*}*/

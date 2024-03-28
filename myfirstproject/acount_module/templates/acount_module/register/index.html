@@ -1,0 +1,21 @@
+{% extends 'layout/layout.html' %}
+{% block title %}
+    ثبت نام در سایت
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <form action="{% url 'register-page' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group col-md-12">
+                {{ field.label }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            <br>
+        {% endfor %}
+    <button type="submit" class="btn-success btn">ثبت نام</button>
+
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout/layout.html' %}
+{% block title %}
+    ورود به حساب کاربری
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <form method="post" action="{% url 'login-page' %}">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group col-md-12">
+            {{ field.label }}
+            {{ field }}
+            {{ field.errors }}
+            </div>
+            <br>
+        {% endfor %}
+    <a href="{% url 'forgot-password' %}"><p>رمز عبور خود را فراموش کرده ام!</p></a>
+    <button class="btn-success btn" type="submit">ورود</button>
+
+    </form>
+    </div>
+{% endblock %}
