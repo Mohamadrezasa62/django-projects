@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>salam test view</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data" action="{% url 'test-view' %}">
+    {% csrf_token %}
+    {{ form }}
+{#<input type="text" oninvalid="this.setCustomValidity('باید وارد کنی!')" oninput="setCustomValidity('salam')" required/>#}
+<input type="submit">
+</form>
+<h1>{{ message }}</h1>
+<ol>
+    {% for x, y in locs %}
+        <li><h4>{{ x }}, {{ y }}</h4></li>
+    {% endfor %}
+</ol>
+
+
+
+</body>
+</html>

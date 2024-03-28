@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+{% load render_partial %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'header/header_refrences.html' %}
+    {% block header_refrences %}
+
+    {% endblock %}
+</head>
+<body>
+    {% render_partial 'header-partial' %}
+    {% block content %}{% endblock %}
+    {% render_partial 'footer-partial' %}
+    {% include 'footer/footer_refrences.html' %}
+</body>
+</html>

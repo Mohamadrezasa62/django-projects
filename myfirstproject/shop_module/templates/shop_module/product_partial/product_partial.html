@@ -1,0 +1,38 @@
+{% load digits_work %}
+<div class="col-sm-{{ col_sm }}">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <div class="productinfo teproductt-center">
+            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt=""/>
+
+            {% else %}
+                                <img src="/static/images/shop/product.jpg" alt=""/>
+
+            {% endif %}
+                {% autoescape off %}
+                <h2>{{ product.title}}</h2>
+                {% endautoescape %}
+                <h2>{{ product.price | three_digit }}</h2>
+                <p>{{ product.short_description }}</p>
+                <a href="#" class="btn btn-default add-to-cart"><i
+                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
+            </div>
+            <div class="product-overlay">
+                <div class="overlay-content">
+                    <h3>{{ product.price | three_digit }}</h3>
+                    <p>{{ product.short_description }}</p>
+
+                    <a href="#" class="btn btn-default add-to-cart"><i
+                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
+                </div>
+            </div>
+        </div>
+        <div class="choose">
+            <ul class="nav nav-pills nav-justified">
+                <li><a href="{% url 'product-detail' slug=product.slug %}"><i class="fa fa-plus-square"></i>مشاهده جزئیات</a></li>
+                <li><a href=""><i class="fa fa-plus-square"></i>مقایسه</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

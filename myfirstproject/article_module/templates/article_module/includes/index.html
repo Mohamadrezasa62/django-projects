@@ -1,0 +1,16 @@
+{% load for_loop %}
+{% if article.rate %}
+
+    <span>
+                                            {% with article.rate|any_digit as parmet %}
+                                                {% if parmet > 0 %}
+                                                    <i class="fa {% if color%}fa-star color{% else %}fa-star-half{% endif %}"></i>
+                                                {% endif %}
+                                            {% endwith %}
+        {% with ''|center:article.rate as range %}
+            {% for i in range %}
+                <i class="fa fa-star"></i>
+            {% endfor %}
+        {% endwith %}
+								        </span>
+{% endif %}

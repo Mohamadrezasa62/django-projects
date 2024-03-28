@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>فعالسازی حساب کاربری</title>
+    <style>
+        h2{
+            color: #3A3A3A;
+            float: right;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<h2>
+    برای فعالسازی حساب کاربری خود بر روی لینک زیر کلیک کنید!
+</h2>
+<a href="http://localhost:8000{% url 'activate-email' email_active_code=email_active_code %}"><button class="btn btn-success">فعالسازی حساب کاربری</button></a>
+</body>
+</html>
