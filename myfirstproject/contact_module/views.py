@@ -70,3 +70,10 @@ def create_contact_us(request: HttpRequest):
         return render(request, 'contact_module/contact_us.html')
     elif request.method == 'GET':
         return render(request, 'contact_module/contact_us.html')
+
+
+def social_media_components_partial(request: HttpRequest):
+    context = {}
+    site_setting = SiteSetting.objects.filter(is_main_setting=True).first()
+    context['setting'] = site_setting
+    return render(request, 'contact_module/social_media_components/index.html', context=context)

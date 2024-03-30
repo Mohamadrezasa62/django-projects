@@ -1,4 +1,5 @@
 {% extends 'layout/layout.html' %}
+{% load render_partial %}
 {% block title %}
     {{ setting.site_name }}-ارتباط با ما
 {% endblock %}
@@ -81,19 +82,8 @@
                     </address>
                     <div class="social-networks">
                         <h2 class="title text-center">شبکـه های اجتـماعی</h2>
-                        <span class="socials-share share">
-									<ul>
-                                        {% for social in setting.social_medias.all %}
-										<a target="_blank" href="{{ social.url }}">
-											<li>
-												<label>{{ social.name }}</label>
-												<img src="{{ social.logo.url }}"/>
-											</li>
-										</a>
-                                        {% endfor %}
-
-									</ul>
-								</span>
+                            {# import social media component by render_partial #}
+                        {% render_partial 'contact_module.views.social_media_components_partial' %}
                     </div>
                 </div>
             </div>

@@ -1,0 +1,13 @@
+<span class="socials-share share">
+									<ul>
+                                        {% for social in setting.social_medias.all %}
+                                            <a target="_blank" href="{{ social.url }}">
+											<li>
+												<label>{{ social.name }}</label>
+												<img src="{{ social.logo.url }}"/>
+											</li>
+										</a>
+                                        {% endfor %}
+
+									</ul>
+								</span>
