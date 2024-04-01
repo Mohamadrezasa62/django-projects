@@ -1,0 +1,28 @@
+{% extends 'layout/layout.html' %}
+{% load filter_is_active %}
+{% block title %}
+    مشاهده پروفایل کاربر {{ user.get_full_name }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>اطلاعات کاربر</h1>
+                <h2>نام: {{ user.get_full_name }}</h2>
+                <h2>تعداد مقالات منتشر شده : {{ user.article_set.count }}</h2>
+                <ul>
+                    <li>
+                        <h3>لیست مقالات منتشر شده:</h3>
+                    </li>
+                    {% with user.article_set.all as articles %}
+
+                    {% for article in articles %}
+                        {% include 'article_module/article_component/index.html' %}
+                    {% endfor %}
+                    {% endwith %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

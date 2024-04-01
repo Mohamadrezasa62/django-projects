@@ -7,4 +7,5 @@ urlpatterns = [
     path('activate-email/<slug:email_active_code>/', views.activate_via_email, name='activate-email'),
     path('forgot-password/', views.ForgotPasswordView.as_view(), name='forgot-password'),
     path('reset-password/<slug:active_code>', views.ResetPasswordView.as_view(), name='reset-password'),
+    path('profile/<int:pk>/', views.UserProfileView.as_view(), name='profile-of-user'),
 ]

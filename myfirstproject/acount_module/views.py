@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.views import View
+from django.views.generic import DetailView
 
 from helper_module.send_mail import send_mail_from_site
 from .forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
@@ -153,3 +154,10 @@ class ResetPasswordView(View):
         return render(request, 'acount_module/reset_password/index.html', {
             'form': reset_form,
         })
+
+
+class UserProfileView(DetailView):
+    model = User
+    template_name = 'acount_module/user_profile/index.html'
+    context_object_name = 'user'
+

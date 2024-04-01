@@ -1,0 +1,26 @@
+{% load thumbnail %}
+<div class="single-blog-post">
+    <h3>{{ article.title }}</h3>
+    <div class="post-meta">
+        <ul>
+            {% if article.author %}
+                <li><i class="fa fa-user"></i> کاربـر 1</li>
+            {% endif %}
+            <li><i class="fa fa-clock-o"></i>{{ article.date_joined }}</li>
+            {#                                        <li><i class="fa fa-calendar"></i> 28 تیـر 1397</li>#}
+        </ul>
+        {# include the star component for article module #}
+        {% include 'article_module/includes/index.html' with article=article %}
+    </div>
+    <a href="">
+        {% if article.image %}
+            {% thumbnail article.image "862x398" crop="center" as im %}
+                <img src="{{ im.url }}" alt="" width="im.width" height="im.height">
+            {% endthumbnail %}
+        {% else %}
+            <img src="/static/images/blog/blog-one.jpg" alt="">
+        {% endif %}
+    </a>
+    <p>{{ article.short_description }}</p>
+    <a class="btn btn-primary" href="{% url 'article-detail' pk=article.id %}">ادامـه مطلب</a>
+</div>

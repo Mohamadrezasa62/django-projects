@@ -1,0 +1,43 @@
+<div class="response-area">
+    <h2>پاسخ ها ({{ article.comments.count }})</h2>
+    <ul class="media-list">
+        {# comments area #}
+        {% for comment in article.comments.all %}
+            <li class="media">
+
+                <a class="pull-right" href="#">
+                    <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
+                </a>
+                <div class="media-body">
+                    <ul class="sinlge-post-meta">
+                        <li><i class="fa fa-user"></i>{{ comment.auther.get_full_name }}</li>
+                        <li><i class="fa fa-clock-o"></i>{{ comment.created_date }}</li>
+                    </ul>
+                    <p>{{ comment.text }}</p>
+                    <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>پاسـخ</a>
+                </div>
+            </li>
+            {# comment's responses area #}
+            {% for respons in comment.responses.all %}
+                <li class="media second-media">
+                    <a class="pull-right" href="#">
+                        <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
+                    </a>
+                    <div class="media-body">
+                        <ul class="sinlge-post-meta">
+                            <li><i class="fa fa-user"></i>{{ respons.auther.get_full_name }}</li>
+                            <li><i class="fa fa-clock-o"></i>{{ respons.created_date }}</li>
+                        </ul>
+                        <p>{{ respons.text }}</p>
+
+                    </div>
+                </li>
+
+            {% endfor %}
+
+
+        {% endfor %}
+
+
+    </ul>
+</div><!--/Response-area-->

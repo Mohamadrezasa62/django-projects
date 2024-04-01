@@ -29,7 +29,8 @@ class Article(models.Model):
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     author = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, verbose_name='نویسنده')
-    rate = models.DecimalField(max_digits=4, decimal_places=1, validators=[MinValueValidator(0), MaxValueValidator(5)], verbose_name='امتیاز')
+    rate = models.DecimalField(max_digits=4, decimal_places=1, validators=[MinValueValidator(0), MaxValueValidator(5)],
+                               verbose_name='امتیاز')
     image = models.ImageField(upload_to='admin-uploads/article_images', null=True, blank=True, verbose_name='تصویر')
 
     def __str__(self):
@@ -38,3 +39,33 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
+
+
+class ArticleComments(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='مقاله مربوطه',
+                                related_name='comments')
+    auther = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='نویسنده')
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
+    text = models.TextField(verbose_name='متن')
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = 'نظر مقالات'
+        verbose_name_plural = 'نظرات مقالات'
+
+
+class ArticleCommentsAnswer(models.Model):
+    auther = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='نویسنده')
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
+    text = models.TextField(verbose_name='متن')
+    comment = models.ForeignKey(ArticleComments, on_delete=models.CASCADE, verbose_name='نظر مربوطه',
+                                related_name='responses')
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = 'پاسخ نظر مقالات'
+        verbose_name_plural = 'پاسخ نظرات مقالات'
