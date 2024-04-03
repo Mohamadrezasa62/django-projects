@@ -7,6 +7,7 @@ import time
 
 # Create your models here.
 
+
 class Tag(models.Model):
     title = models.CharField(max_length=255, db_index=True)
 
@@ -56,7 +57,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     description = models.TextField(blank=True, verbose_name='توضیحات')
     short_description = models.CharField(max_length=300, verbose_name='توضیحات کوتاه', null=True)
-    rate = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0, verbose_name='امتیاز')
+    rate = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0,
+                               verbose_name='امتیاز')
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
     is_delete = models.BooleanField(default=False, verbose_name='حذف شده / نشده')
     slug = models.SlugField(blank=True, default='', db_index=True, unique=True, verbose_name='اسلاگ')
@@ -70,8 +72,10 @@ class Product(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True, null=True, verbose_name='زمان ایجاد')
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, verbose_name='برند', null=True)
     last_watched_time = models.DateTimeField(null=True, verbose_name='تاریخ آخرین بازدید توسط کاربران')
-    count_number_of_views = models.IntegerField(default=0, validators=[MinValueValidator(0)], verbose_name='تعداد مشاهده ها')
+    count_number_of_views = models.IntegerField(default=0, validators=[MinValueValidator(0)],
+                                                verbose_name='تعداد مشاهده ها')
     image = models.FileField(upload_to='admin-uploads', null=True, blank=True, verbose_name='تصویر محصول')
+
     # 2024-03-11 19:58:29.735387
 
     def __str__(self):

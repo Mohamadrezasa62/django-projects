@@ -2,6 +2,7 @@
 {% load for_loop %}
 {% load thumbnail %}
 {% load render_partial %}
+{% load jalalidate %}
 {% block title %}
     مقاله {{ article.title }}
 {% endblock %}
@@ -20,7 +21,7 @@
                                     {% if article.author %}
                                         <li><i class="fa fa-user"></i>{{ article.author.first_name }}</li>
                                     {% endif %}
-                                    <li><i class="fa fa-clock-o"></i>{{ article.date_joined }}</li>
+                                    <li><i class="fa fa-clock-o"></i>{{ article.date_joined | show_jalali }}</li>
                                     {#									<li><i class="fa fa-calendar"></i> 28 تیـر 1397</li>#}
                                 </ul>
                                 {% include 'article_module/includes/index.html' with article=article %}
@@ -50,6 +51,7 @@
                         <ul class="ratings">
                             <li class="rate-this">به این مطلب امتیـاز دهیـد :</li>
                             <li>
+                                {# incude this to show dynamic rating stars #}
                                 {% include 'article_module/includes/index.html' with article=article color=color %}
                             </li>
                             <li class="color">( 6 نظـر )</li>
@@ -98,7 +100,7 @@
                         </div><!--Comments-->
                     {% endif %}
                     {% include 'article_module/article_detail/comments_component/index.html' %}
-                    <div class="replay-box">
+                    <div id="replay-box" class="replay-box">
                         <div class="row">
                             {% if request.user.is_authenticated %}
                                 <form method="post" action="{% url 'add-article-comment' %}">
@@ -109,6 +111,9 @@
                                         {{ field.errors }}
                                     {% endfor %}
                                     <input type="hidden" name="article_id" value="{{ article.id }}">
+                                    <input type="hidden" id="is_answer" name="is_answer" value="0">
+                                    <input type="hidden" id="comment_id" name="comment_id" value="0">
+
                                     <button class="btn btn-primary" type="submit">ارسال نظر</button>
 
 

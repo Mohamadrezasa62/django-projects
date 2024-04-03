@@ -27,6 +27,7 @@ class SiteSetting(models.Model):
     about_us_text = models.TextField(verbose_name='متن درباره ما')
     site_logo = models.ImageField(upload_to='admin-uploads/user-uploads', verbose_name='تصویر سایت')
     social_medias = models.ManyToManyField(SocialMedias, blank=True, verbose_name='شبکه های اجتماعی')
+    banners = models.ManyToManyField('SiteBanner', null=True, blank=True, verbose_name='بنرها')
 
     class Meta:
         verbose_name = 'تنظیمات سایت'
@@ -34,6 +35,17 @@ class SiteSetting(models.Model):
 
     def __str__(self):
         return f'تنظیمات شماره {self.id}'
+
+
+class SiteBanner(models.Model):
+    image = models.ImageField(upload_to='upload-files/admin-uploads/banners', verbose_name='تصویر')
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = 'بنر'
+        verbose_name_plural = 'بنر ها'
 
 
 class FooterBoxHeader(models.Model):

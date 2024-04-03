@@ -28,7 +28,7 @@ def header_partial(request: HttpRequest):
 
 def footer_partial(request: HttpRequest):
     site_setting = SiteSetting.objects.filter(is_main_setting=True).first()
-    footer_box_headers = FooterBoxHeader.objects.all()
+    footer_box_headers = FooterBoxHeader.objects.all().prefetch_related('items')
     return render(request, 'footer/index.html', {
         'setting': site_setting,
         'footer_headers': footer_box_headers,

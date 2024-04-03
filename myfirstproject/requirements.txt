@@ -1,0 +1,6 @@
+Django~=5.0.3
+django-debug-toolbar~=4.3.0
+asgiref~=3.7.2
+setuptools~=65.5.0
+sqlparse~=0.4.4
+attrs~=23.2.0

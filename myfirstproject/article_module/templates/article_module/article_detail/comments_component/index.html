@@ -1,8 +1,8 @@
 <div class="response-area">
-    <h2>پاسخ ها ({{ article.comments.count }})</h2>
+    <h2>نظرات  ({{ article.comments.count }})</h2>
     <ul class="media-list">
         {# comments area #}
-        {% for comment in article.comments.all %}
+        {% for comment in comments %}
             <li class="media">
 
                 <a class="pull-right" href="#">
@@ -14,7 +14,8 @@
                         <li><i class="fa fa-clock-o"></i>{{ comment.created_date }}</li>
                     </ul>
                     <p>{{ comment.text }}</p>
-                    <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>پاسـخ</a>
+                    {# needs href or not?!  #}
+                    <a href="#replay-box" class="btn btn-primary" onclick="add_comment_answer({{ comment.id }})"><i class="fa fa-reply"></i>پاسـخ</a>
                 </div>
             </li>
             {# comment's responses area #}
