@@ -9,13 +9,13 @@ class CommentForm(forms.Form):
                                'required': 'نوشتن نام ضروری است',
                                'max_length': 'نام نباید خیلی طولانی باشد'
                            })
-    text = forms.CharField(max_length=600, widget=forms.Textarea(attrs={'placeholder': "متن پیام ...", 'rows': "11"}),
+    text = forms.CharField(max_length=600,
+                           widget=forms.Textarea(attrs={'placeholder': "متن پیام ...", 'rows': "11", 'id': 'text'}),
                            label='نظر شما',
                            error_messages={
                                'required': 'نوشتن نظر ضروری است',
-                               'max_length': 'نظر نباید خیلی طولانی باشد'
+                               'max_length': 'نظر نباید خیلی طولانی باشد',
                            })
-
 
 # class CommentForm(forms.ModelForm):
 #     class Meta:

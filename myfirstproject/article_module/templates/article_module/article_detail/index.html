@@ -99,22 +99,25 @@
                             </div>
                         </div><!--Comments-->
                     {% endif %}
+                    <div class="response-area">
                     {% include 'article_module/article_detail/comments_component/index.html' %}
+                    </div><!--/Response-area-->
+
                     <div id="replay-box" class="replay-box">
                         <div class="row">
                             {% if request.user.is_authenticated %}
-                                <form method="post" action="{% url 'add-article-comment' %}">
+                                <form>
                                     {% csrf_token %}
                                     {% for field in form %}
                                         {{ field.label_tag }}
                                         {{ field }}
                                         {{ field.errors }}
                                     {% endfor %}
-                                    <input type="hidden" name="article_id" value="{{ article.id }}">
+                                    <input type="hidden" id="article_id" name="article_id" value="{{ article.id }}">
                                     <input type="hidden" id="is_answer" name="is_answer" value="0">
                                     <input type="hidden" id="comment_id" name="comment_id" value="0">
 
-                                    <button class="btn btn-primary" type="submit">ارسال نظر</button>
+                                    <button class="btn btn-primary" onclick="add_comment_article()">ارسال نظر</button>
 
 
                                     {#                            <div class="col-sm-8">#}

@@ -36,6 +36,7 @@ def footer_partial(request: HttpRequest):
 
 
 def main_page(request: HttpRequest):
+    print('salam', request.resolver_match.url_name)
     if request.method == 'GET':
         context = {}
         return render(request, "home_module/main_page/index.html", context)

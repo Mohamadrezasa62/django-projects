@@ -1,6 +1,7 @@
 from django.db.models import QuerySet, Count, Max
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -57,23 +58,53 @@ def article_category_component_partial(request: HttpRequest):
 
 
 def add_article_comment(request: HttpRequest):
-    if request.method == "POST":
-        article_id = request.POST.get("article_id")
-        form = CommentForm(request.POST)
-        comment_id = request.POST.get('comment_id')
-        is_answer = request.POST.get('is_answer')
-        if form.is_valid():
-            if is_answer == "0":
-                comment = ArticleComments(article_id=article_id, text=form.cleaned_data.get('text'),
-                                          auther=request.user)
-                comment.save()
-                return redirect(reverse('article-detail', args=[article_id]))
-            else:
-                comment = ArticleCommentsAnswer(text=form.cleaned_data.get('text'),
-                                                auther=request.user, comment_id=comment_id)
-                comment.save()
-                return redirect(reverse('article-detail', args=[article_id]))
-        return render(request, 'article_module/article_detail/index.html',
-                      {'form': form,
-                       'article': Article.objects.filter(
-                           pk=article_id, is_active=True).first()})
+    if request.user.is_authenticated:
+        user = request.user
+        text = request.GET.get('text')
+        article_id = int( request.GET.get('article_id'))
+        is_answer = int(request.GET.get('is_answer'))
+        comment_id = int(request.GET.get('comment_id'))
+        print(text, article_id, is_answer, comment_id)
+        if is_answer == 0:
+            comment = ArticleComments(article_id=article_id, auther=user, text=text)
+            comment.save()
+            return redirect('article-list')
+            # or
+            # render('*.html')
+            # or
+            # return HttpResponse('salam')
+        else:
+
+            comment = ArticleCommentsAnswer(auther=user, text=text, comment_id=comment_id)
+            comment.save()
+            return render(request, 'article_module/article_detail/comments_component/index.html',
+                          context={'comments': ArticleComments.objects.all()})
+    return HttpResponse('salam')
+
+    # if request.method == "GET":
+    #     print('im in view')
+    #     dicto = {
+    #         'text': 'bjbj',
+    #         'name': 'vhvhv'
+    #     }
+    #     form = CommentForm(dicto)
+    #     article_id = request.GET.get("article_id")
+    #     comment_id = request.GET.get('comment_id')
+    #     is_answer = request.GET.get('is_answer')
+    #     print('s:', form.text, form.name)
+    #     if form.is_valid():
+    #         print('form valid')
+    #         if is_answer == "0":
+    #             comment = ArticleComments(article_id=article_id, text=form.cleaned_data.get('text'),
+    #                                       auther=request.user)
+    #             comment.save()
+    #             return redirect(reverse('article-detail', args=[article_id]))
+    #         else:
+    #             comment = ArticleCommentsAnswer(text=form.cleaned_data.get('text'),
+    #                                             auther=request.user, comment_id=comment_id)
+    #             comment.save()
+    #             return redirect(reverse('article-detail', args=[article_id]))
+    #     return render(request, 'article_module/article_detail/index.html',
+    #                   {'form': form,
+    #                    'article': Article.objects.filter(
+    #                        pk=article_id, is_active=True).first()})
